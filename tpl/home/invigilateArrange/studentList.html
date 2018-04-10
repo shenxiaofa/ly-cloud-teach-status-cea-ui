@@ -1,0 +1,108 @@
+<script>
+	$(function() {
+		$("#home1").click(function() {
+			$("body").fadeOut();
+			setTimeout("window.location.href='/#!/teacher-index'", 500);
+			$("body").fadeIn(800);
+		});
+		$("#home2").click(function() {
+			$("body").fadeOut();
+			setTimeout("javascript:history.go(-1)", 500);
+			$("body").fadeIn(800);
+		});
+	});
+</script>
+<style>
+	.studentList_title{
+		height: 42px;
+	    line-height: 41px;
+	    font-size: 24px;
+	    text-align: center;
+	}
+	.modal-footer {
+		border-top: 0px #e5e5e5 solid!important;
+		padding: 10px;
+	}
+	
+	.nav-tabs>li.active>a,
+	.nav-tabs>li.active>a:hover,
+	.nav-tabs>li.active>a:focus {
+		border-left: 1px solid #ddd;
+		border-right: 1px solid #ddd;
+		border-radius: 6px 6px 0 0;
+		border-top-color: #03a9f5;
+		border-bottom: none;
+	}
+	
+	.el-breadcrumb__item {
+		box-sizing: border-box;
+		width: 100%;
+	}
+	
+	.el-breadcrumb__item__inner,
+	.el-breadcrumb__item__inner a {
+		transition: color .15s linear;
+		color: #48576a;
+	}
+	
+	.el-breadcrumb {
+		font-size: 13px;
+		line-height: 1;
+		display: block;
+    	padding: 12px 0 10px 10px;
+		border-bottom: 1px solid #efefef;
+		width: 100%;
+	}
+	
+	.el-breadcrumb__separator {
+		margin: 0 8px;
+		color: #bfcbd9;
+	}
+	
+	html, body, .module {
+		width: 100%;
+		/*height: 96%;*/
+	}
+	
+	.row {
+		margin-right: 0px;
+		margin-left: 0px;
+	}
+	
+</style>
+<div>
+	<div class="el-breadcrumb">
+				<span class="el-breadcrumb__item">
+					<a href="javascript:void(0)"><span id="home1" class="el-breadcrumb__item__inner"><b>首页</b></span></a>
+					<span class="el-breadcrumb__separator">/</span>
+					<a href="javascript:void(0)"><span id="home2" class="el-breadcrumb__item__inner"><b>监考查询安排</b></span></a>
+					<span class="el-breadcrumb__separator">/</span>
+					<span class="el-breadcrumb__item__inner">考生名单</span>
+				</span>
+			</div>
+	<div class="studentList_title">
+		考试1班考生名单
+	</div>
+	<div class="studentList_ct">
+		<div class="studentList_ct_t">
+			<div class="col-xs-2">
+				学年学期：{{semester}}
+			</div>
+			<div class="col-xs-2">
+				课程名称：{{courseName}}
+			</div>
+			<div class="col-xs-2">
+				开课单位：{{dept}}
+			</div>
+			<div class="col-xs-2">
+				学分：{{credit}}
+			</div>
+			<div class="col-xs-4">
+				考试时间：{{startEndTime}}
+			</div>
+		</div>
+		<div class="studentList_ct_table" style="padding: 10px;">
+			<table id="invigilateArrangeStudentListTable" ui-jq="bootstrapTable" ui-options="invigilateArrangeStudentListTable" class="table table-responsive"></table>
+		</div>
+	</div>
+</div>

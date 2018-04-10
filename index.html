@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html ng-app="hiocsApp">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>北影教务系统</title>
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="vendor/libs/bootstrap/bootstrap.css" type="text/css">
+
+    <!-- zTree -->
+    <link rel="stylesheet" href="vendor/jquery/zTree/css/zTreeStyle/metro.css" type="text/css">
+
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="vendor/libs/font-awesome/font-awesome.min.css" type="text/css">
+
+    <!-- angular -->
+    <link rel="stylesheet" href="vendor/angular/ng-scroll-bar/ng-scroll-bar.min.css" type="text/css">
+
+    <!-- app -->
+    <link rel="stylesheet" href="css/base.css" type="text/css">
+    <link rel="stylesheet" href="css/lycea.css" type="text/css">
+    <link rel="stylesheet" href="css/app.css" type="text/css">
+
+    <!-- app directive -->
+    <link rel="stylesheet" href="js/directive/left-sidebar/left-sidebar.css" type="text/css">
+    <link rel="stylesheet" href="js/directive/left-sidebar/left-sidebar-icon.css" type="text/css">
+
+    <link rel="stylesheet" href="css/bussiness.css" type="text/css">
+
+    <link rel="stylesheet" href="js/directive/angular-bootstrap-nav-tree/abn_tree.css" type="text/css">
+
+    <!-- login -->
+    <link rel="stylesheet" href="css/login/login.css" type="text/css">
+    <link rel="stylesheet" href="tpl/login/login.css" type="text/css">
+    
+    <link rel="stylesheet" href="tpl/home/bussiness.css" type="text/css">
+</head>
+<body ng-controller="hiocsCtr as ocsCtr" ng-class="{'thin-left-nav':$storage.thinLeftNav}">
+
+    <!-- 加载提示 -->
+    <div class="tc zhe" style="width: 100%; height: 100%; text-align: center;" ng-show="showLoading">
+        <img src="img/loading.gif" style="position: absolute; margin-top: -21px;top: 50%;margin-left: -21px;left: 50%;">
+    </div>
+
+    <div class="warp_bg" ui-view=""></div>
+
+    <!-- jquery -->
+    <script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
+
+    <!-- stomp -->
+    <script type="text/javascript" src="vendor/libs/stomp/stomp.min.js"></script>
+
+    <!-- lodop -->
+    <script type="text/javascript" src="vendor/libs/lodop/LodopFuncs.js"></script>
+
+    <!-- encrypt -->
+    <script type="text/javascript" src="vendor/libs/gt/gt.min.js"></script>
+    <script type="text/javascript" src="vendor/jquery/jquery-base64/jquery.base64.js"></script>
+
+    <!-- zTree -->
+    <script type="text/javascript" src="vendor/jquery/zTree/js/jquery.ztree.all-3.5.min.js"></script>
+
+    <!-- bootstrap -->
+    <script type="text/javascript" src="vendor/libs/bootstrap/bootstrap.min.js"></script>
+
+    <!-- angular -->
+    <script type="text/javascript" src="vendor/angular/angular/angular.min.js"></script>
+    <script type="text/javascript" src="vendor/angular/angular-sanitize/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="vendor/angular/angular-ui-router/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="vendor/angular/angular-breadcrumb/angular-breadcrumb.min.js"></script>
+    <script type="text/javascript" src="vendor/angular/ocLazyLoad/ocLazyLoad.js"></script>
+    <script type="text/javascript" src="vendor/angular/angular-animate/angular-animate.min.js"></script>
+    <script type="text/javascript" src="vendor/angular/bindonce/bindonce.min.js"></script>
+    <script type="text/javascript" src="vendor/angular/angular-locale/angular-locale_zh-cn.js"></script>
+    <script type="text/javascript" src="vendor/angular/ui-bootstrap-tpls/ui-bootstrap-tpls-2.4.0.min.js"></script>
+    <script type="text/javascript" src="vendor/angular/ng-scroll-bar/ng-scroll-bar.min.js"></script>
+    <script type="text/javascript" src="vendor/angular/ngStorage/ngStorage.min.js"></script>
+    <script type="text/javascript" src="vendor/angular/ng-clipboard/ngclipboard.min.js"></script>
+    <script type="text/javascript" src="vendor/angular/angular-cookies/angular-cookies.min.js"></script>
+    <script type="text/javascript" src="vendor/angular/angular-uuid4/angular-uuid4.min.js"></script>
+
+    <!-- app -->
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/config.js"></script>
+    <script type="text/javascript" src="js/run.js"></script>
+    <script type="text/javascript" src="js/config.lazyload.js"></script>
+
+    <!-- app router -->
+    <script type="text/javascript" src="js/config.router.js"></script>
+    <script type="text/javascript" src="js/router/system.js"></script>
+    <script type="text/javascript" src="js/router/teacherEntering.js"></script>
+    <script type="text/javascript" src="js/router/teacherScheduleQuery.js"></script>
+    <script type="text/javascript" src="js/router/teacherMakeupEntering.js"></script>
+    <script type="text/javascript" src="js/router/teacherExamMethodApproval.js"></script>
+    <script type="text/javascript" src="js/router/teacherInvigilateArrange.js"></script>
+
+    <!-- app controller -->
+    <script type="text/javascript" src="js/controller/appController.js"></script>
+
+    <!-- app service -->
+    <script type="text/javascript" src="js/service/ui-load.js"></script>
+    <script type="text/javascript" src="js/service/alertService/alertService.js"></script>
+    <script type="text/javascript" src="js/service/formVerifyService.js"></script>
+
+    <!-- app directive -->
+    <script type="text/javascript" src="js/directive/ui-nav/ui-nav.js"></script>
+    <script type="text/javascript" src="js/directive/left-sidebar/left-sidebar.js"></script>
+    <script type="text/javascript" src="js/directive/ui-jq.js"></script>
+    <script type="text/javascript" src="js/directive/integer.js"></script>
+    <script type="text/javascript" src="js/directive/date-gt.js"></script>
+    <script type="text/javascript" src="js/directive/search-showHide.js"></script>
+    <script type="text/javascript" src="js/directive/angular-bootstrap-nav-tree/abn_tree_directive.js"></script>
+    <script type="text/javascript" src="js/directive/z-tree.js"></script>
+    <script type="text/javascript" src="js/directive/ui-chosen.js"></script>
+    <script type="text/javascript" src="js/directive/has-permission.js"></script>
+    <script type="text/javascript" src="js/directive/has-role.js"></script>
+    <script type="text/javascript" src="js/directive/select-content.js"></script>
+
+    <!-- 登录 -->
+    <script type="text/javascript" src="tpl/login/js/loginController.js"></script>
+    <script type="text/javascript" src="tpl/login/js/loginService.js"></script>
+
+    <!-- 登出 -->
+    <script type="text/javascript" src="tpl/login/js/logoutController.js"></script>
+    <script type="text/javascript" src="tpl/login/js/logoutService.js"></script>
+
+    <!-- 基础数据 -->
+    <script type="text/javascript" src="tpl/baseinfo/general/js/generalService.js"></script>
+
+    <!-- 系统管理 -->
+    <script type="text/javascript" src="tpl/system/organization/roleManage/js/roleManageController.js"></script>
+    <script type="text/javascript" src="tpl/system/organization/roleManage/js/roleManageService.js"></script>
+    <script type="text/javascript" src="tpl/system/organization/departmentManage/js/departmentManageController.js"></script>
+    <script type="text/javascript" src="tpl/system/organization/departmentManage/js/departmentManageService.js"></script>
+    <script type="text/javascript" src="tpl/system/organization/userManage/js/userManageController.js"></script>
+    <script type="text/javascript" src="tpl/system/organization/userManage/js/userSelectorController.js"></script>
+    <script type="text/javascript" src="tpl/system/organization/userManage/js/userManageService.js"></script>
+    <script type="text/javascript" src="tpl/system/organization/userGroupManage/js/userGroupManageController.js"></script>
+    <script type="text/javascript" src="tpl/system/organization/userGroupManage/js/userGroupManageService.js"></script>
+    <script type="text/javascript" src="tpl/system/permissionManage/permissionManage/js/permissionManageController.js"></script>
+    <script type="text/javascript" src="tpl/system/permissionManage/permissionManage/js/permissionManageService.js"></script>
+    <script type="text/javascript" src="tpl/system/permissionManage/dataPermissionManage/js/dataPermissionManageController.js"></script>
+    <script type="text/javascript" src="tpl/system/permissionManage/dataPermissionManage/js/dataPermissionManageService.js"></script>
+    <script type="text/javascript" src="tpl/system/permissionManage/dataPermissionManage/js/dataPermissionSelectorController.js"></script>
+    <script type="text/javascript" src="tpl/system/permissionManage/dataPermissionResourceManage/js/dataPermissionResourceManageController.js"></script>
+    <script type="text/javascript" src="tpl/system/permissionManage/dataPermissionResourceManage/js/dataPermissionResourceManageService.js"></script>
+    <script type="text/javascript" src="tpl/system/log/operationLog/js/operationLogController.js"></script>
+    <script type="text/javascript" src="tpl/system/log/operationLog/js/operationLogService.js"></script>
+
+    <!-- 教师端 -->
+    <script type="text/javascript" src="tpl/home/js/teachIndexController.js"></script>
+    <script type="text/javascript" src="tpl/home/js/teachIndexService.js"></script>
+    <script type="text/javascript" src="tpl/home/entering/js/enteringController.js"></script>
+    <script type="text/javascript" src="tpl/home/entering/js/enteringBatchController.js"></script>
+    <script type="text/javascript" src="tpl/home/entering/js/enteringBatchService.js"></script>
+    <script type="text/javascript" src="tpl/home/makeupEntering/js/makeupEnteringBatchController.js"></script>
+    <script type="text/javascript" src="tpl/home/makeupEntering/js/makeupEnteringBatchService.js"></script>
+    <script type="text/javascript" src="tpl/home/makeupEntering/js/makeupEnteringController.js"></script>
+    <script type="text/javascript" src="tpl/home/examMethodApproval/js/examMethodApprovalController.js"></script>
+    <script type="text/javascript" src="tpl/home/examMethodApproval/js/ensureExamMethodController.js"></script>
+    <script type="text/javascript" src="tpl/home/examMethodApproval/js/ensureExamMethodService.js"></script>
+    <script type="text/javascript" src="tpl/home/invigilateArrange/js/invigilateArrangeController.js"></script>
+    <script type="text/javascript" src="tpl/home/invigilateArrange/js/invigilateArrangeStudentController.js"></script>
+    <script type="text/javascript" src="tpl/home/scheduleQuery/js/scheduleQueryController.js"></script>
+    
+</body>
+</html>

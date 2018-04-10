@@ -1,0 +1,142 @@
+<nav class="navbar navbar-default navs nav-all" role="navigation" id="navPosition">
+	<div class="container-fluid">
+		<div class="navbar-header logo">
+			<img src="img/logo_bg.png" alt="">
+			<p>本科教务系统</p>
+		</div>
+		<ul class="nav navbar-nav navbar-right fr">
+			<li>
+				<a ng-click="switchIndexPage()" href="javascript:void(0)"><img src="img/home.png"></a>
+			</li>
+			<li class="admin">
+				<img src="img/user.png" class="img-circle">
+				<span>{{user.name}}</span>
+			</li>
+			<li class="sl">
+				<a href="javascript:;" ng-click="showHideHelpList()" class="helpListA"><img src="img/help.png"></a>
+				<ul class="studentList" ng-hide="helpList">
+					<li>
+						<a href="{{jwxtURL}}/upload/xsxksc.doc" type="_blank">学生选课帮助手册下载</a>
+					</li>
+					<li>
+						<a href="{{jwxtURL}}/upload/tykxkhelp.doc" type="_blank">体育课选课帮助手册下载</a>
+					</li>
+					<li>
+						<a href="tpl/html/help/IESettingAndNotes.html" target="_blank">IE设置帮助</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="{{teaJwglxtURL}}/#!/login" ui-sref="logout" id="toLogin"><img src="img/zoom.png"></a>
+			</li>
+			<li class="sl">
+				<a href="javascript:;" ng-click="showHideTeachList()" class="teachListA"><img ng-src="{{imgsFlag}}"></a>
+				<ul class="studentList" ng-hide="teachList">
+					<li>
+						<a>个人服务</a>
+						<div class="list-all" style="display: none">
+							<span class="triangle2"></span>
+							<ul>
+								<li ng-if="privileges.jwxsd_wdxj">
+									<a href="{{jwxtURL}}/casLogin?_tocasurl=forward.action?path=/jwjc.jsp?urlMark=1" target="_blank">我的学籍</a>
+								</li>
+								<li ng-if="privileges.jwxsd_wdxyyj">
+									<a href="javascript:;" ui-sref="teacher.warning">我的学业预警</a>
+								</li>
+								<li ng-if="privileges.jwxsd_wdcj">
+									<a href="{{jwxtURL}}/casLogin?_tocasurl=forward.action?path=/jwjc.jsp?urlMark=9" target="_blank">我的成绩</a>
+								</li>
+								<li ng-if="privileges.jwxsd_wdxfxf">
+									<a href="{{stuCcmsURL}}/casLogin?_tocasurl=/teacher/infostatistis/creditTuitionStasController/findMyPage" target="_blank">我的学分学费</a>
+								</li>
+								<li ng-if="privileges.jwxsd_wdxkjg">
+									<a href="{{jwxtURL}}/casLogin?_tocasurl=forward.action?path=/jwjc.jsp?urlMark=6" target="_blank">我的选课结果</a>
+								</li>
+								<li ng-if="privileges.jwxsd_wdpj">
+									<a href="{{jwxtURL}}/casLogin?_tocasurl=forward.action?path=/jwjc.jsp?urlMark=10" target="_blank">我的评教</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<a>选课服务</a>
+						<div class="list-all" style="display: none">
+							<span class="triangle2"></span>
+							<ul>
+								<li ng-if="privileges.jwxsd_wdxkjg">
+									<a href="{{jwxtURL}}/casLogin?_tocasurl=forward.action?path=/jwjc.jsp?urlMark=6" target="_blank">我的选课结果</a>
+								</li>
+								<li ng-if="privileges.jwxsd_tykxk">
+									<a href="{{jwxtURL}}/casLogin?_tocasurl=forward.action?path=/jwjc.jsp?urlMark=7" target="_blank">体育课选课</a>
+								</li>
+								<li ng-if="privileges.jwxsd_xkxt">
+									<a href="{{electURL}}/casLogin" target="_blank">选课系统</a>
+								</li>
+								<li ng-if="privileges.jwxsd_jsjhsxksq">
+									<a href="{{jwxtURL}}/casLogin?_tocasurl=forward.action?path=/jwjc.jsp?urlMark=13" target="_blank">接收交换生选课申请</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<a>报名申请服务</a>
+						<div class="list-all" style="display: none">
+							<span class="triangle2"></span>
+							<ul>
+								<li ng-if="privileges.jwxsd_wdxljbm">
+									<a href="{{jwxtURL}}/casLogin?_tocasurl=forward.action?path=/jwjc.jsp?urlMark=11" target="_blank">四六级报名</a>
+								</li>
+								<li ng-if="privileges.jwxsd_wdzzysq">
+									<a href="{{jwxtURL}}/casLogin?_tocasurl=forward.action?path=/jwjc.jsp?urlMark=12" target="_blank">转专业申请</a>
+								</li>
+								<li ng-if="privileges.jwxsd_wdyxzy">
+									<a href="{{stuCcmsURL}}/casLogin?_tocasurl=/zyyx/mymajorpre" target="_blank">预选专业申请</a>
+								</li>
+								<li ng-if="privileges.jwxsd_wdzyrdsq">
+									<a href="{{stuCcmsURL}}/casLogin?_tocasurl=/majordetermine/majorDetermineAppl" target="_blank">专业认定申请</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<a>公共查询服务</a>
+						<div class="list-all" style="display: none">
+							<span class="triangle2"></span>
+							<ul>
+								<li ng-if="privileges.jwxsd_kckcx"><a href="{{jwxtURL}}/casLogin?_tocasurl=forward.action?path=/jwjc.jsp?urlMark=2" target="_blank">课程库查询</a></li>
+								<li>
+									<a href="javascript:;" ui-sref="teacher.courseLibraryStuView">
+										<div class="courseLibrary"></div>
+										<p>课程库查询</p>
+									</a>
+								</li>
+								<li ng-if="privileges.jwxsd_qxkkkccx">
+									<a href="{{jwxtURL}}/casLogin?_tocasurl=forward.action?path=/jwjc.jsp?urlMark=3" target="_blank">全校开课课程查询</a>
+								</li>
+								<li ng-if="privileges.jwxsd_pyfacx">
+									<a href="{{jwxtURL}}/casLogin?_tocasurl=forward.action?path=/jwjc.jsp?urlMark=4" target="_blank">培养方案查询</a>
+								</li>
+								<li ng-if="privileges.jwxsd_kkjhcx">
+									<a href="{{jwxtURL}}/casLogin?_tocasurl=forward.action?path=/jwjc.jsp?urlMark=5" target="_blank">开课计划查询</a>
+								</li>
+								<li ng-if="privileges.jwxsd_bkzycx">
+									<a href="javascript:;" ui-sref="teacher.professionSearch">本科专业查询</a>
+								</li>
+								<li ng-if="privileges.jwxsd_kbcx">
+									<a href="{{jwxtURL}}/casLogin?_tocasurl=forward.action?path=/jwjc.jsp?urlMark=8" target="_blank">课表查询</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</li>
+		</ul>
+
+		<iframe id="xkLogOut" style="display: none;"></iframe>
+		<iframe id="qmxfzLogOut" style="display: none;"></iframe>
+		<iframe id="drjwLogOut" style="display: none;"></iframe>
+	</div>
+</nav>
+<div id="footer" class="footer footer3">
+	<p>版权所有<span>&copy;</span>北京电影学院 <span>BEIJING FILE ACADEMY</span></p>
+</div>

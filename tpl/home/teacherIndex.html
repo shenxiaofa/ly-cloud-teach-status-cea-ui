@@ -1,0 +1,533 @@
+<style>
+	.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+		border-left: 1px solid #ddd;
+		border-right: 1px solid #ddd;
+		border-radius: 6px 6px 0 0;
+		border-top-color: #03a9f5;
+    	border-bottom: none;
+	}
+	::-webkit-scrollbar{
+		width:0px;
+	}
+	.all {
+		background: #F1F1F1;
+		width: 100%;
+		/*height: calc(100% - 60px);*/
+		margin-top: 60px;
+		/*overflow: hidden;*/
+	}
+	.user_info li{
+		    width: 100%;
+    height: auto;
+	}
+	.user_info label{
+		    width: 50% !important;
+	}
+	.user_info li span{
+		display: inline-block;
+	    width: 50%;
+	    height: 20px;
+	}
+</style>
+<nav class="navbar navbar-default navs nav-all" role="navigation">
+	<div class="container-fluid">
+		<div class="navbar-header logo">
+			<img src="img/logo_bg.png" alt="">
+			<p>本科教务系统</p>
+		</div>
+		<ul class="nav navbar-nav navbar-right fr">
+			<li>
+				<a ng-click="switchIndexPage()" href="javascript:void(0)"><img src="img/home.png"></a>
+			</li>
+			<!-- 下面临时去除 -->
+			<li class="admin">
+				<img src="img/user.png" class="img-circle">
+				<span>{{user.name}}</span>
+			</li>
+			<li class="sl">
+				<a href="javascript:;" ng-click="showHideHelpList()" class="helpListA"><img src="img/help.png"></a>
+				<ul class="studentList" ng-hide="helpList">
+					<li>
+						<a href="{{jwxtURL}}/upload/xsxksc.doc" type="_blank">学生选课帮助手册下载</a>
+					</li>
+					<li>
+						<a href="{{jwxtURL}}/upload/tykxkhelp.doc" type="_blank">体育课选课帮助手册下载</a>
+					</li>
+					<li>
+						<a href="tpl/html/help/IESettingAndNotes.html" target="_blank">IE设置帮助</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="{{teaJwglxtURL}}/#!/login" ui-sref="logout" id="toLogin"><img src="img/zoom.png"></a>
+			</li>
+			<li class="sl">
+				<a href="javascript:;" ng-click="showHideTeachList()" class="teachListA"><img ng-src="{{imgsFlag}}"></a>
+				<ul class="studentList" ng-hide="teachList">
+					<li>
+						<a>个人服务</a>
+						<div class="list-all" style="display: none">
+							<span class="triangle2"></span>
+							<ul>
+								<li ng-if="privileges.jwxsd_wdxj">
+									<a href="{{jwxtURL}}/casLogin?_tocasurl=forward.action?path=/jwjc.jsp?urlMark=1" target="_blank">我的学籍</a>
+								</li>
+								<li ng-if="privileges.jwxsd_wdxyyj">
+									<a href="javascript:;" ui-sref="teacher.warning">我的学业预警</a>
+								</li>
+								<li ng-if="privileges.jwxsd_wdcj">
+									<a href="{{jwxtURL}}/casLogin?_tocasurl=forward.action?path=/jwjc.jsp?urlMark=9" target="_blank">我的成绩</a>
+								</li>
+								<li ng-if="privileges.jwxsd_wdxfxf">
+									<a href="{{stuCcmsURL}}/casLogin?_tocasurl=/teacher/infostatistis/creditTuitionStasController/findMyPage" target="_blank">我的学分学费</a>
+								</li>
+								<li ng-if="privileges.jwxsd_wdxkjg">
+									<a href="{{jwxtURL}}/casLogin?_tocasurl=forward.action?path=/jwjc.jsp?urlMark=6" target="_blank">我的选课结果</a>
+								</li>
+								<li ng-if="privileges.jwxsd_wdpj">
+									<a href="{{jwxtURL}}/casLogin?_tocasurl=forward.action?path=/jwjc.jsp?urlMark=10" target="_blank">我的评教</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<a>选课服务</a>
+						<div class="list-all" style="display: none">
+							<span class="triangle2"></span>
+							<ul>
+								<li ng-if="privileges.jwxsd_wdxkjg">
+									<a href="{{jwxtURL}}/casLogin?_tocasurl=forward.action?path=/jwjc.jsp?urlMark=6" target="_blank">我的选课结果</a>
+								</li>
+								<li ng-if="privileges.jwxsd_tykxk">
+									<a href="{{jwxtURL}}/casLogin?_tocasurl=forward.action?path=/jwjc.jsp?urlMark=7" target="_blank">体育课选课</a>
+								</li>
+								<li ng-if="privileges.jwxsd_xkxt">
+									<a href="{{electURL}}/casLogin" target="_blank">选课系统</a>
+								</li>
+								<li ng-if="privileges.jwxsd_jsjhsxksq">
+									<a href="{{jwxtURL}}/casLogin?_tocasurl=forward.action?path=/jwjc.jsp?urlMark=13" target="_blank">接收交换生选课申请</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<a>报名申请服务</a>
+						<div class="list-all" style="display: none">
+							<span class="triangle2"></span>
+							<ul>
+								<li ng-if="privileges.jwxsd_wdxljbm">
+									<a href="{{jwxtURL}}/casLogin?_tocasurl=forward.action?path=/jwjc.jsp?urlMark=11" target="_blank">四六级报名</a>
+								</li>
+								<li ng-if="privileges.jwxsd_wdzzysq">
+									<a href="{{jwxtURL}}/casLogin?_tocasurl=forward.action?path=/jwjc.jsp?urlMark=12" target="_blank">转专业申请</a>
+								</li>
+								<li ng-if="privileges.jwxsd_wdyxzy">
+									<a href="{{stuCcmsURL}}/casLogin?_tocasurl=/zyyx/mymajorpre" target="_blank">预选专业申请</a>
+								</li>
+								<li ng-if="privileges.jwxsd_wdzyrdsq">
+									<a href="{{stuCcmsURL}}/casLogin?_tocasurl=/majordetermine/majorDetermineAppl" target="_blank">专业认定申请</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<a>公共查询服务</a>
+						<div class="list-all" style="display: none">
+							<span class="triangle2"></span>
+							<ul>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</li>
+		</ul>
+
+		<iframe id="xkLogOut" style="display: none;"></iframe>
+		<iframe id="qmxfzLogOut" style="display: none;"></iframe>
+		<iframe id="drjwLogOut" style="display: none;"></iframe>
+	</div>
+</nav>
+<div class="all">
+	<div class="all-left">
+		<div class="pull-right p10">
+			<i class="fa fa-outdent fa-lg" aria-hidden="true" style="color: #666;cursor: pointer;" ng-click="teacherLeft()"></i>
+		</div>
+		<div class="all-left_wrap">
+			<div class="head">
+				<img src="img/user.png">
+			</div>
+			<p><span>{{teacher.teacherName}}</span>&nbsp;<span>{{teacher.entranceModeName}}</span></p>
+			<ul class="user_info">
+				<li><label>教工号：</label><span>{{teacher.teacherNum}}</span></li>
+				<li><label>部门：</label><span>{{teacher.departmentNumName}}</span></li>
+				<li><label>教职工类型：</label><span>{{teacher.teacherTypeName}}</span></li>
+				<li><label>当前状态：</label><span>{{teacher.thisStateNumName}}</span></li>
+				<li><label>常驻校区：</label><span>{{teacher.schoolName}}</span></li>
+			</ul>
+		</div>
+	</div>
+
+	<!-- 右侧 -->
+	<div class="all-right">
+		<div>
+			<div class="zhe" ng-show="showLoading">
+				<img src="img/loading.gif">
+			</div>
+			<div class="student">
+				<div class="contents">
+					<div class="notice">
+						<div class="notice-left">
+							<div class="top">
+								<h4 ng-click="showHideEduList()"><span class="glyphicon glyphicon-list"></span>教务处公告</h4>
+								<a href="javascript:;" ui-sref="teacher.eduNotice">更多&nbsp;>></a>
+							</div>
+							<div class="notice-con" ng-hide="hideEduList">
+								<ul>
+									<li ng-repeat="item in eduForList">
+										<span class="num">&nbsp;</span>
+										<a href="javascript:;" ng-click="getNoticeDetial(item)">
+											<span ng-bind="item.title"></span>
+											<img ng-if="item.newDeliveryMark != 0" src="img/new.gif">
+										</a>
+										<span ng-bind="item.deliveryDate" class="time"></span>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="notice-right">
+							<div class="top">
+								<h4 ng-click="showHideCollegeList()"><span class="glyphicon glyphicon-list"></span>院系公告</h4>
+								<a href="javascript:;" ui-sref="teacher.collegeNotice">更多&nbsp;>></a>
+							</div>
+							<div class="notice-con" ng-hide="hideCollegeList">
+								<ul>
+									<li ng-repeat="item in collegeForList">
+										<span class="num">&nbsp;</span>
+										<a href="javascript:;" ng-click="getNoticeDetial(item)">
+											<span ng-bind="item.title"></span>
+											<img ng-if="item.newDeliveryMark != 0" src="img/new.gif">
+										</a>
+										<span ng-bind="item.deliveryDate" class="time"></span>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="in-icon tab-all">
+						<div class="top">
+							<h4 ng-click="showHideIcon()" class='showHideIcon'><span class="glyphicon glyphicon-list"></span>我的服务</h4>
+						</div>
+						<div class="category tab teachIcon" ng-hide="teachIcon">
+							<ul id="myTab" class="nav nav-tabs">
+								<li class="active">
+									<a href="#all" data-toggle="tab" target="_self">所有服务</a>
+								</li>
+								<li>
+									<a href="#affair" data-toggle="tab" target="_self">事务办理服务</a>
+								</li>
+								<li>
+									<a href="#query" data-toggle="tab" target="_self">查询服务</a>
+								</li>
+							</ul>
+							<div class="tab-content imgs-content" id="myTabContent">
+								<div class="tab-pane fade in active" id="all">
+									<ul class="list-unstyled">
+										<!--<li ng-if="privileges.jwjsd_zkcjlr">-->
+										<li>
+											<!--<a href="{{teaJwglxtURL}}/casLogin?_tocasurl=forward.action?path=/jwjc.jsp?urlMark=T2" target="_blank">-->
+											<a href="javascript:void(0)">
+												<div id="zkcjlr" style="background-image: url(../../img/teacherIndex/entering_icon.png);" ng-click="jumpToEntering()"></div>
+												<p>正考成绩录入</p>
+											</a>
+										</li>
+										<!--<li ng-if="privileges.jwjsd_bkcjlr">-->
+										<li>
+											<a href="javascript:void(0)">
+												<div id="bkcjlr" style="background-image: url(../../img/teacherIndex/makeupEntering_icon.png);" ng-click="jumpToMakeupEntering()"></div>
+												<p>补考成绩录入</p>
+											</a>
+										</li>
+										<!--<li ng-if="privileges.jwjsd_ksfssq">-->
+										<li>
+											<a href="javascript:void(0)">
+												<div id="ksfssq" style="background-image: url(../../img/teacherIndex/examMethodApproval_icon.png);" ng-click="jumpToExamMethodApproval()"></div>
+												<p>考试方式申请</p>
+											</a>
+										</li>
+										<!--<li ng-if="privileges.jwjsd_ksfssq">-->
+										<li>
+											<a href="javascript:void(0)">
+												<div id="ksfssq" style="background-image: url(../../img/teacherIndex/examMethodApproval_icon.png);" ng-click="jumpToInvigilateArrange()"></div>
+												<p>监考查询安排</p>
+											</a>
+										</li>
+										<!--<li ng-if="privileges.jwjsd_ksfssq">-->
+										<li>
+											<a href="javascript:void(0)">
+												<div id="jskbcx" style="background-image: url(../../img/teacherIndex/examMethodApproval_icon.png);" ng-click="jumpToScheduleQuery()"></div>
+												<p>课表查询</p>
+											</a>
+										</li>
+										<!--<li ng-if="privileges.jwjsd_cjfchf">-->
+										<!--<li>
+											<a href="javascript:void(0)">
+												<div id="cjfchf" style="background-image: url(../../img/teacherIndex/examRecheck_icon.png);" ng-click="examRecheck()"></div>
+												<p>成绩复查回复</p>
+											</a>
+										</li>-->
+										<!--<li ng-if="privileges.jwjsd_cjdfc">-->
+										<!--<li>
+											<a href="javascript:void(0)">
+												<div id="cjdfc" style="background-image: url(../../img/teacherIndex/examRegister_icon.png);" ng-click="examRegister()"></div>
+												<p>成绩登分册</p>
+											</a>
+										</li>-->
+										<!--<li ng-if="privileges.jwjsd_jxjhcx">-->
+										<!--<li>
+											<a href="javascript:void(0)">
+												<div id="jxjhcx" style="background-image: url(../../img/teacherIndex/schemeCheck_icon.png);" ng-click="schemeCheck()"></div>
+												<p>教学计划查询</p>
+											</a>
+										</li>-->
+										<!--<li ng-if="privileges.jwjsd_kkjhcx">-->
+										<!--<li> 
+											<a href="javascript:void(0)">
+												<div id="kkjhcx" style="background-image: url(../../img/teacherIndex/startCheck_icon.png);" ng-click="startCheck()"></div>
+												<p>开课计划查询</p>
+											</a>
+										</li>-->
+										<!--<li ng-if="privileges.jwjsd_xscx">-->
+										<!--<li>
+											<a href="javascript:void(0)">
+												<div id="xscx" style="background-image: url(../../img/teacherIndex/studentCheck_icon.png);" ng-click="schemeCheck()"></div>
+												<p>学生查询</p>
+											</a>
+										</li>-->
+										<!--<li ng-if="privileges.jwjsd_rkxxcx">-->
+										<!--<li>
+											<a href="javascript:void(0)">
+												<div id="rkxxcx" style="background-image: url(../../img/teacherIndex/lessonInfoCheck_icon.png);" ng-click="lessonInfoCheck()"></div>
+												<p>任课信息查询</p>
+											</a>
+										</li>-->
+										<!--<li ng-if="privileges.jwjsd_kckcx">-->
+										<!--<li>
+											<a href="javascript:void(0)">
+												<div id="kckcx" style="background-image: url(../../img/teacherIndex/courseLibCheck_icon.png);" ng-click="courseLibCheck()"></div>
+												<p>课程库查询</p>
+											</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="tab-pane fade" id="affair">
+									<ul>
+										<!--<li ng-if="privileges.jwjsd_zkcjlr">-->
+										<li>
+											<!--<a href="{{teaJwglxtURL}}/casLogin?_tocasurl=forward.action?path=/jwjc.jsp?urlMark=T2" target="_blank">-->
+											<a href="javascript:void(0)">
+												<div id="zkcjlr" style="background-image: url(../../img/teacherIndex/entering_icon.png);" ng-click="jumpToEntering()"></div>
+												<p>正考成绩录入</p>
+											</a>
+										</li>
+										<!--<li ng-if="privileges.jwjsd_bkcjlr">-->
+										<li>
+											<a href="javascript:void(0)">
+												<div id="bkcjlr" style="background-image: url(../../img/teacherIndex/makeupEntering_icon.png);" ng-click="jumpToMakeupEntering()"></div>
+												<p>补考成绩录入</p>
+											</a>
+										</li>
+										<!--<li ng-if="privileges.jwjsd_ksfssq">-->
+										<li>
+											<a href="javascript:void(0)">
+												<div id="ksfssq" style="background-image: url(../../img/teacherIndex/examMethodApproval_icon.png);" ng-click="jumpToExamMethodApproval()"></div>
+												<p>考试方式申请</p>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="tab-pane fade" id="query">
+									<ul>
+										<!--<li ng-if="privileges.jwjsd_ksfssq">-->
+										<li>
+											<a href="javascript:void(0)">
+												<div id="ksfssq" style="background-image: url(../../img/teacherIndex/examMethodApproval_icon.png);" ng-click="jumpToInvigilateArrange()"></div>
+												<p>监考查询安排</p>
+											</a>
+										</li>
+										<!--<li ng-if="privileges.jwjsd_ksfssq">-->
+										<li>
+											<a href="javascript:void(0)">
+												<div id="jskbcx" style="background-image: url(../../img/teacherIndex/examMethodApproval_icon.png);" ng-click="jumpToScheduleQuery()"></div>
+												<p>课表查询</p>
+											</a>
+										</li>
+										<!--<li ng-if="privileges.jwjsd_jxjhcx">-->
+										<!--<li>
+											<a href="javascript:void(0)">
+												<div id="jxjhcx" style="background-image: url(../../img/teacherIndex/schemeCheck_icon.png);" ng-click="schemeCheck()"></div>
+												<p>教学计划查询</p>
+											</a>
+										</li>-->
+										<!--<li ng-if="privileges.jwjsd_kkjhcx">-->
+										<!--<li>
+											<a href="javascript:void(0)">
+												<div id="kkjhcx" style="background-image: url(../../img/teacherIndex/startCheck_icon.png);" ng-click="startCheck()"></div>
+												<p>开课计划查询</p>
+											</a>
+										</li>-->
+										<!--<li ng-if="privileges.jwjsd_xscx">-->
+										<!--<li>
+											<a href="javascript:void(0)">
+												<div id="xscx" style="background-image: url(../../img/teacherIndex/studentCheck_icon.png);" ng-click="schemeCheck()"></div>
+												<p>学生查询</p>
+											</a>
+										</li>-->
+										<!--<li ng-if="privileges.jwjsd_rkxxcx">-->
+										<!--<li>
+											<a href="javascript:void(0)">
+												<div id="rkxxcx" style="background-image: url(../../img/teacherIndex/lessonInfoCheck_icon.png);" ng-click="lessonInfoCheck()"></div>
+												<p>任课信息查询</p>
+											</a>
+										</li>-->
+										<!--<li ng-if="privileges.jwjsd_kckcx">-->
+										<!--<li>
+											<a href="javascript:void(0)">
+												<div id="kckcx" style="background-image: url(../../img/teacherIndex/courseLibCheck_icon.png);" ng-click="courseLibCheck()"></div>
+												<p>课程库查询</p>
+											</a>
+										</li>-->
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="details">
+						<div class="top">
+							<h4 ng-click="showHideDetails()" class="showHideDetails"><span class="glyphicon glyphicon-list"></span>我的贡献</h4>
+						</div>
+						<div class="teach detailsd" ng-hide="details" style="padding: 4px;">
+							<div class="text">
+								<p>老师辛苦了，截止上学期，您已担任了：<span class="glyphicon glyphicon-info-sign tips"></span></p>
+								<div class="tips_ct">
+									<span class="tips_t"></span> 1.此数据仅供参考！
+									<br /> 2.红色为当前学期！
+								</div>
+								<div class="text-con">
+									<ul class="list-unstyled">
+										<li>
+											<div class="serve">
+												<div><span>{{teacherContribution.teachCourseNumber}}</span></div>
+												<div class="current"><span>{{teacherNowContribution.teachCourseNumber}}</span></div>
+											</div>
+											<p>课程</p>
+										</li>
+										<li>
+											<div class="serve">
+												<div><span>{{teacherContribution.teachClassNumber}}</span></div>
+												<div class="current"><span>{{teacherNowContribution.teachClassNumber}}</span></div>
+											</div>
+											<p>教学班</p>
+										</li>
+										<li>
+											<div class="serve">
+												<div><span>{{teacherContribution.teachTotalPeriod}}</span></div>
+												<div class="current"><span>{{teacherNowContribution.teachTotalPeriod}}</span></div>
+											</div>
+											<p>总学时</p>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="text" style="padding-bottom: 5px;">
+								<p>成绩录入情况：</p>
+								<div class="text-con">
+									<ul class="list-unstyled situation">
+										<li>
+											<div><span>{{teacherEnteringSituation.totalEnteringCount}}</span></div>
+											<p>应录入课程数</p>
+										</li>
+										<li>
+											<div><span>{{teacherEnteringSituation.alreadyEnteringCourseCount}}</span></div>
+											<p>已提交</p>
+										</li>
+										<li>
+											<div><span>{{teacherEnteringSituation.unEnteringCourseCount}}</span></div>
+											<p>未提交</p>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="warning">
+						<div class="top">
+							<h4 ng-click="showHideSchedule()"><span class="glyphicon glyphicon-list"></span>我的课表</h4>
+						</div>
+						<div class="tab times" ng-hide="scheduleText">
+							<a class="pre" ng-click="pre()">&lt;&lt;</a>
+							<div class="tabs-all">
+								<ul id="myTab2" class="nav nav-tabs">
+									<li ng-repeat="item in weeklyList" ng-class="{true:'active'}[item.weekly == weekly]" ng-style="{ 'width' : '{{liWidth}}' }" target="_self">
+										<a data-toggle="tab" ng-click="getCourse(item.weekly)">{{item.weeklyName}}</a>
+									</li>
+								</ul>
+							</div>
+							<a class="next" ng-click="next()">&gt;&gt;</a>
+							<div id="myTabContent2" class="tab-content">
+								<div class="tab-pane fade in active" id="one">
+									<h4 class="tc" style="margin: 15px 0;"><span ng-bind="academicYear"></span>第{{weekly}}</span>周：（<span ng-bind="weekTimeMap.startTime"></span>至<span ng-bind="weekTimeMap.endTime"></span>）</h4>
+									<table class="table table-bordered">
+										<thead>
+											<tr>
+												<th>节次</th>
+												<th>星期一</th>
+												<th>星期二</th>
+												<th>星期三</th>
+												<th>星期四</th>
+												<th>星期五</th>
+												<th>星期六</th>
+												<th>星期日</th>
+											</tr>
+										</thead>
+										<tbody id="tbody">
+											<tr ng-repeat="item in sectionList" id="row{{item.id}}">
+												<td>{{item.section}} <br/>（{{item.beginTime}}~{{item.endTime}}）</td>
+												<td id="{{item.id}}_1">
+													<div>{{courseList[$index]['monday']}}</div>
+												</td>
+												<td id="{{item.id}}_2">
+													<div>{{courseList[$index]['tuesday']}}</div>
+												</td>
+												<td id="{{item.id}}_3">
+													<div>{{courseList[$index]['wednesday']}}</div>
+												</td>
+												<td id="{{item.id}}_4">
+													<div>{{courseList[$index]['thursday']}}</div>
+												</td>
+												<td id="{{item.id}}_5">
+													<div>{{courseList[$index]['friday']}}</div>
+												</td>
+												<td id="{{item.id}}_6">
+													<div>{{courseList[$index]['saturday']}}</div>
+												</td>
+												<td id="{{item.id}}_7">
+													<div>{{courseList[$index]['sunday']}}</div>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="footer footer3">
+		<p>版权所有<span>&copy;</span>北京电影学院 <span>BEIJING FILE ACADEMY</span></p>
+	</div>
+</div>

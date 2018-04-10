@@ -1,0 +1,69 @@
+<script>
+	$(document).ready(function() {
+		$("#home1").click(function() {	// 返回教师端首页
+			$("body").fadeOut();
+			setTimeout("window.location.href='/#!/teacher-index'", 500);
+			$("body").fadeIn(800);
+		});
+		$("#home2,#home3").click(function() {	// 返回上一级
+			$("body").fadeOut();
+			setTimeout("javascript:history.go(-1)", 500);
+			$("body").fadeIn(800);
+		});
+	});
+</script>
+<style>
+.el-breadcrumb__item {
+    box-sizing: border-box;	
+    width: 100%;
+}
+.el-breadcrumb__item__inner, .el-breadcrumb__item__inner a {
+	transition: color .15s linear;
+    color: #48576a;
+}
+.el-breadcrumb {
+    font-size: 13px;
+    line-height: 1;
+    display: block;
+    padding: 12px 0 10px 10px;
+    border-bottom: 1px solid #efefef; 
+    width: 100%;
+}
+.el-breadcrumb__separator {
+    margin: 0 8px;
+    color: #bfcbd9;
+}
+html, body, .module {
+    width: 100%;
+    /*height: 96%;*/
+}
+.row {
+    margin-right: -10px;
+    margin-left: -15px;
+}
+.fixed-table-container {
+    clear: unset;
+}
+</style>
+<div class="all">
+	<div class="right-content">
+		<div class="el-breadcrumb" style="border-bottom: 1px solid #ddd;">
+			<span class="el-breadcrumb__item">
+				<a ng-click="jumpToIndexPage()" href="javascript:void(0)"><span id="home1" class="el-breadcrumb__item__inner"><b>首页</b></span></a>
+				<span class="el-breadcrumb__separator">/</span>
+				<a href="javascript:void(0)"><span id="home2" class="el-breadcrumb__item__inner"><b>考试方式申请</b></span></a>
+				<span class="el-breadcrumb__separator">/</span>
+				<span class="el-breadcrumb__item__inner">确定考试方式</span>
+			</span>
+			<button id="home3" type="button" class="btn btn-default" style="padding: 0 15px!important;height: 22px;line-height: 22px;margin: -5px 12px;float:right;">
+				返回
+			</button>
+			<button type="button" ng-click="submit()" class="btn btn-info" style="padding: 0 15px!important;height: 22px;line-height: 22px;margin: -5px 10px;float:right;">
+				提交
+			</button>
+		</div>
+		<div class="right-content-table" style="margin-top: 10px;">
+			<table id="ensureExamMethodTable" ui-jq="bootstrapTable" ui-options="ensureExamMethodTable" class="table table-responsive"></table>
+		</div>
+	</div>
+</div>

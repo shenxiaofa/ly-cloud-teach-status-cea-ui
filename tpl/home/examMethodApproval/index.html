@@ -1,0 +1,120 @@
+<script>
+	$(document).ready(function() {
+		$("#home1").click(function() {
+			$("body").fadeOut();
+			setTimeout("window.location.href='/#!/teacher-index'", 500);
+			$("body").fadeIn(800);
+		});
+	});
+</script>
+<style>
+	.modal-footer {
+		border-top: 0px #e5e5e5 solid!important;
+		padding: 10px;
+	}
+	
+	.nav-tabs>li.active>a,
+	.nav-tabs>li.active>a:hover,
+	.nav-tabs>li.active>a:focus {
+		border-left: 1px solid #ddd;
+		border-right: 1px solid #ddd;
+		border-radius: 6px 6px 0 0;
+		border-top-color: #03a9f5;
+		border-bottom: none;
+	}
+	
+	.el-breadcrumb__item {
+		box-sizing: border-box;
+		width: 100%;
+	}
+	
+	.el-breadcrumb__item__inner,
+	.el-breadcrumb__item__inner a {
+		transition: color .15s linear;
+		color: #48576a;
+	}
+	
+	.el-breadcrumb {
+		font-size: 13px;
+		line-height: 1;
+		display: block;
+    	padding: 12px 0 10px 10px;
+		border-bottom: 1px solid #efefef;
+		width: 100%;
+	}
+	
+	.el-breadcrumb__separator {
+		margin: 0 8px;
+		color: #bfcbd9;
+	}
+	
+	html, body, .module {
+		width: 100%;
+		/*height: 96%;*/
+	}
+	
+	.row {
+		margin-right: 0px;
+		margin-left: 0px;
+	}
+	
+	.right-content-table {
+	    padding: 10px 10px;
+	}
+</style>
+<div class="all">
+	<div class="right-content">
+		<div class="el-breadcrumb">
+			<span class="el-breadcrumb__item">
+				<a href="javascript:void(0)"><span id="home1" class="el-breadcrumb__item__inner"><b>首页</b></span></a>
+			<span class="el-breadcrumb__separator">/</span>
+			<span class="el-breadcrumb__item__inner">考试方式申请</span>
+			</span>
+		</div>
+		<div class="right-content-search" style="padding: 10px 10px 10px 10px;">
+			<div>
+				<label class="control-label search-control" ng-click="searchFormHideToggle()">
+				<i class="fa" ng-class="{'fa-caret-down': !isHideSearchForm, 'fa-caret-right': isHideSearchForm}"></i>&nbsp;查询条件
+			</label>
+			</div>
+			<div ng-hide="isHideSearchForm">
+				<form name="enteringSearchForm" class="form-horizontal search-form">
+					<div class="row">
+						<div class="form-group col-xs-3">
+							<label class="col-xs-6 control-label">学年学期：</label>
+							<div class="col-xs-6">
+	                            <select ng-model="examMethodApproval.semesterId"  id="semesterId" name="semesterId" ui-jq="chosen" ui-options="{search_contains: true}" class="form-control">
+	                                <option value="">==请选择==</option>
+	                            </select>
+							</div>
+						</div>
+						<div class="form-group col-xs-3">
+							<label class="col-xs-6 control-label">审批状态：</label>
+							<div class="col-xs-6">
+								<select ng-model="examMethodApproval.status" ng-required="true" id="status" name="status" ui-jq="chosen" ui-options="{search_contains: true}" class="form-control">
+									<option value="">==请选择==</option>
+									<option value="0">不通过</option>
+									<option value="1">通过</option>
+									<option value="2">已提交</option>
+									<option value="3">未提交</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-xs-2">
+							<!-- 点击触发 ng-submit 事件 -->
+							<button type="submit" class="col-xs-4 btn btn-info" ng-click="searchSubmit(enteringSearchForm)">
+								<span class="fa fa-search refer btn-icon-padding"></span>查询
+							</button>
+							<button type="button" class="col-xs-4 btn btn-default" ng-click="searchReset()" style="margin-left: 3%;">
+								<span class="fa fa-refresh reset btn-icon-padding"></span>重置
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="right-content-table" style="">
+			<table id="examMethodApprovalTable" ui-jq="bootstrapTable" ui-options="examMethodApprovalTable" class="table table-responsive"></table>
+		</div>
+	</div>
+</div>
